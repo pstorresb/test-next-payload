@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.env
+.env.local
+media/
+payload-types.ts
+*.log
+*.tsbuildinfo
+.DS_Store

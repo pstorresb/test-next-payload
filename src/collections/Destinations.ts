@@ -1,0 +1,44 @@
+import type { CollectionConfig, FieldHook } from 'payload'
+
+const slugify = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+
+const setSlug: FieldHook = ({ value, siblingData }) => {
+  if (typeof value === 'string' && value.length > 0) return slugify(value)
+  return typeof siblingData?.name === 'string' ? slugify(siblingData.name) : value
+}
+
+export const Destinations: CollectionConfig = {
+  slug: 'destinations',
+  labels: { singular: 'Destino', plural: 'Destinos' },
+  admin: {
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'slug', 'updatedAt'],
+    group: 'Contenido',
+  },
+  access: {
+    read: () => true,
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
+  fields: [
+    { name: 'name', type: 'text', required: true, localized: true },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      index: true,
+      hooks: { beforeValidate: [setSlug] },
+      admin: { description: 'Se genera desde el nombre si se deja vacío.' },
+    },
+    { name: 'description', type: 'textarea', localized: true },
+  ],
+}
