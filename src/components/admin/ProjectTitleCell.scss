@@ -1,0 +1,21 @@
+.project-title-cell {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.65rem;
+}
+
+.project-title-cell__image,
+.project-title-cell__placeholder {
+  background: var(--theme-elevation-150);
+  border-radius: 3px;
+  height: 38px;
+  object-fit: cover;
+  width: 54px;
+}
+
+.project-title-cell__placeholder {
+  align-items: center;
+  display: inline-flex;
+  font-size: 0.6rem;
+  justify-content: center;
+}

@@ -50,7 +50,17 @@ export const Projects: CollectionConfig = {
           label: 'Datos generales',
           fields: [
             localeTabs('generalLocaleTabs'),
-            { name: 'title', type: 'text', required: true, localized: true },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              localized: true,
+              admin: {
+                components: {
+                  Cell: '@/components/admin/ProjectTitleCell#ProjectTitleCell',
+                },
+              },
+            },
             {
               name: 'slug',
               type: 'text',
