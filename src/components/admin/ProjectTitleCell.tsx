@@ -13,12 +13,13 @@ const mediaId = (value: MediaReference | null | undefined) =>
 type ProjectTitleCellProps = {
   cellData?: string
   collectionSlug?: string
+  link?: boolean
   linkURL?: string
   onClick?: (args: { cellData: unknown; collectionSlug: string; rowData: unknown }) => void
-  rowData?: { mainImage?: MediaReference }
+  rowData?: { id?: number | string; mainImage?: MediaReference }
 }
 
-export function ProjectTitleCell({ cellData, collectionSlug, linkURL, onClick, rowData }: ProjectTitleCellProps) {
+export function ProjectTitleCell({ cellData, collectionSlug, link, linkURL, onClick, rowData }: ProjectTitleCellProps) {
   const id = mediaId(rowData?.mainImage)
   const [media, setMedia] = useState<MediaDocument | null>(null)
 
@@ -47,12 +48,14 @@ export function ProjectTitleCell({ cellData, collectionSlug, linkURL, onClick, r
     </span>
   )
 
-  if (!linkURL && !onClick) return content
+  const detailURL = linkURL || (link && rowData?.id ? `/admin/collections/${collectionSlug || 'projects'}/${rowData.id}` : undefined)
+
+  if (!detailURL && !onClick) return content
 
   return (
     <a
       className="project-title-cell__link"
-      href={linkURL || '#'}
+      href={detailURL || '#'}
       onClick={(event) => {
         if (!onClick || !collectionSlug) return
         event.preventDefault()
