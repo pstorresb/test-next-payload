@@ -11,7 +11,8 @@
     "payload": "payload",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "seed": "payload run src/seed.ts"
+    "seed": "payload run src/seed.ts",
+    "migrate:amenity-icons": "payload run src/migrate-amenity-icons.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.88.0",
@@ -25,6 +26,7 @@
     "payload": "3.88.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-icons": "^5.7.0",
     "sharp": "^0.34.5"
   },
   "devDependencies": {

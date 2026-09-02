@@ -109,10 +109,10 @@ async function run() {
   }
 
   const amenityData = [
-    ['Piscina', 'Swimming Pool', '🏊'],
-    ['Gimnasio', 'Gym', '🏋️'],
-    ['Seguridad 24/7', '24/7 Security', '🛡️'],
-    ['Área infantil', 'Kids Area', '🛝'],
+    ['Piscina', 'Swimming Pool', 'pool'],
+    ['Gimnasio', 'Gym', 'gym'],
+    ['Seguridad 24/7', '24/7 Security', 'security'],
+    ['Área infantil', 'Kids Area', 'baby'],
   ] as const
 
   const amenityIDs: number[] = []

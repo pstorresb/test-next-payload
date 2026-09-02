@@ -16,6 +16,14 @@ export const Amenities: CollectionConfig = {
   },
   fields: [
     { name: 'name', type: 'text', required: true, localized: true },
-    { name: 'icon', type: 'text', admin: { description: 'Emoji o nombre de icono opcional' } },
+    {
+      name: 'icon',
+      type: 'text',
+      admin: {
+        components: {
+          Field: '@/components/admin/AmenityIconPicker#AmenityIconPicker',
+        },
+      },
+    },
   ],
 }

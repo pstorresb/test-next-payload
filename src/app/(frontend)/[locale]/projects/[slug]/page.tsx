@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
+import { getAmenityIconComponent, isAmenityIconKey } from '@/lib/amenity-icons'
+
 export const dynamic = 'force-dynamic'
 
 const locales = ['es', 'en'] as const
@@ -126,7 +128,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <section className="mt-10 border-t border-slate-200 pt-8">
               <h2 className="mb-4 text-xl font-semibold">{copy.amenities}</h2>
               <ul className="grid grid-cols-2 gap-3 text-sm text-slate-700">
-                {amenities.map((amenity) => <li key={amenity.id} className="rounded-lg bg-slate-50 px-3 py-2">{amenity.icon && <span className="mr-2">{amenity.icon}</span>}{amenity.name}</li>)}
+                {amenities.map((amenity) => {
+                  const Icon = getAmenityIconComponent(amenity.icon)
+                  return <li key={amenity.id} className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2">{isAmenityIconKey(amenity.icon) ? <Icon aria-hidden="true" className="text-blue-700" /> : amenity.icon && <span>{amenity.icon}</span>}{amenity.name}</li>
+                })}
               </ul>
             </section>
           )}
