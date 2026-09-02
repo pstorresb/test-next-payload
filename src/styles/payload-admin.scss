@@ -1,0 +1,54 @@
+/* Editor de contenido: mantiene los estilos de Payload, pero mejora el espacio de escritura. */
+.rich-text-lexical {
+  .fixed-toolbar {
+    background: var(--theme-input-bg);
+    border: 1px solid var(--theme-elevation-200);
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+    min-height: 44px;
+    overflow-x: auto;
+    padding: 5px 8px;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+
+  .editor-container {
+    background: var(--theme-input-bg);
+    border: 1px solid var(--theme-elevation-200);
+    border-radius: 0 0 8px 8px;
+    font-family: var(--font-body);
+    font-size: 16px;
+  }
+
+  .editor-scroller {
+    min-height: 290px;
+  }
+
+  .editor-scroller > .editor > .ContentEditable__root {
+    min-height: 250px;
+    padding: 24px 28px;
+  }
+
+  .editor-scroller > .editor > .ContentEditable__root:before {
+    display: none;
+  }
+
+  .editor-scroller > .editor > div > .LexicalEditorTheme__placeholder {
+    left: 28px;
+    top: 24px;
+  }
+
+  .ContentEditable__root p {
+    line-height: 1.65;
+    margin: 0 0 0.8rem;
+  }
+
+  .ContentEditable__root h1,
+  .ContentEditable__root h2,
+  .ContentEditable__root h3 {
+    font-family: var(--font-body);
+    line-height: 1.25;
+  }
+}
