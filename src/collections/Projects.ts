@@ -109,6 +109,15 @@ export const Projects: CollectionConfig = {
               hasMany: true,
               localized: true,
             },
+            {
+              name: 'mainImagePicker',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: '@/components/admin/MainImagePicker#MainImagePicker',
+                },
+              },
+            },
           ],
         },
         {
