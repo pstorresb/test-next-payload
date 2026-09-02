@@ -138,18 +138,23 @@ export const Projects: CollectionConfig = {
                 },
               ],
             },
-          ],
-        },
-        {
-          label: 'Amenidades',
-          fields: [
-            localeTabs('amenitiesLocaleTabs'),
             {
-              name: 'amenities',
-              label: 'Amenidades',
-              type: 'relationship',
-              relationTo: 'amenities',
-              hasMany: true,
+              type: 'collapsible',
+              label: 'Amenidades del proyecto',
+              admin: { initCollapsed: false },
+              fields: [
+                localeTabs('amenitiesLocaleTabs'),
+                {
+                  name: 'amenities',
+                  label: 'Amenidades',
+                  type: 'relationship',
+                  relationTo: 'amenities',
+                  hasMany: true,
+                  admin: {
+                    description: 'Selecciona las amenidades disponibles para este proyecto.',
+                  },
+                },
+              ],
             },
           ],
         },
