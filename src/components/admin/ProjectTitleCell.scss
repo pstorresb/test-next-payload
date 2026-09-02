@@ -4,6 +4,15 @@
   gap: 0.65rem;
 }
 
+.project-title-cell__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-title-cell__link:hover .project-title-cell > span:last-child {
+  text-decoration: underline;
+}
+
 .project-title-cell__image,
 .project-title-cell__placeholder {
   background: var(--theme-elevation-150);
