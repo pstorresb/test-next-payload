@@ -2,6 +2,44 @@
   margin: 1rem 0 1.5rem;
 }
 
+.main-image-preview {
+  margin: 1rem 0 1.5rem;
+}
+
+.main-image-preview__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 0.65rem;
+}
+
+.main-image-preview__image {
+  background: var(--theme-elevation-100);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 6px;
+  max-width: 420px;
+  overflow: hidden;
+}
+
+.main-image-preview__image img,
+.main-image-preview__image .main-image-picker__placeholder {
+  display: block;
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.main-image-preview__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.55rem 0 0;
+}
+
+.main-image-preview__help {
+  color: var(--theme-elevation-500);
+  font-size: 0.8rem;
+  margin: 0.25rem 0 0;
+}
+
 .main-image-picker--empty,
 .main-image-picker__help {
   color: var(--theme-elevation-500);

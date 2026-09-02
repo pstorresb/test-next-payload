@@ -98,7 +98,16 @@ export const Projects: CollectionConfig = {
               required: true,
               localized: true,
               admin: {
-                description: 'Puede usar el mismo recurso en ambos idiomas o seleccionar uno diferente para el idioma activo.',
+                hidden: true,
+              },
+            },
+            {
+              name: 'mainImagePreview',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: '@/components/admin/MainImagePicker#MainImagePreview',
+                },
               },
             },
             {
