@@ -1,4 +1,13 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, FieldHook } from 'payload'
+
+const filenameAsAlt: FieldHook = ({ data, siblingData, value }) => {
+  if (typeof value === 'string' && value.trim()) return value
+
+  const filename = siblingData?.filename || data?.filename
+  if (typeof filename !== 'string') return value
+
+  return filename.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' ').trim()
+}
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -29,6 +38,12 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
       localized: true,
+      hooks: {
+        beforeValidate: [filenameAsAlt],
+      },
+      admin: {
+        description: 'Se completa automáticamente con el nombre del archivo. Puede editarlo para una descripción más útil.',
+      },
     },
   ],
 }
