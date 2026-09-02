@@ -10,3 +10,48 @@ body {
   background: #f8fafc;
   color: #0f172a;
 }
+
+.project-description {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.project-description h1,
+.project-description h2,
+.project-description h3,
+.project-description h4 {
+  color: #0f172a;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.75rem 0 0.75rem;
+}
+
+.project-description h1 { font-size: 2rem; }
+.project-description h2 { font-size: 1.5rem; }
+.project-description h3 { font-size: 1.25rem; }
+.project-description h4 { font-size: 1.125rem; }
+
+.project-description p { margin: 0 0 1rem; }
+
+.project-description ul,
+.project-description ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+.project-description ul { list-style: disc; }
+.project-description ol { list-style: decimal; }
+
+.project-description a {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.project-description blockquote {
+  border-left: 3px solid #cbd5e1;
+  color: #64748b;
+  font-style: italic;
+  margin: 1rem 0;
+  padding-left: 1rem;
+}

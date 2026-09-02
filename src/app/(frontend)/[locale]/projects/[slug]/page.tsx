@@ -122,7 +122,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             {typeof project.area === 'number' && <div><dt className="text-xs text-slate-500">{copy.area}</dt><dd className="mt-1 font-semibold">{project.area} m²</dd></div>}
           </dl>
 
-          {project.description && <RichText className="prose prose-slate max-w-none" data={project.description} />}
+          {project.description && <RichText className="project-description" data={project.description} />}
 
           {amenities.length > 0 && (
             <section className="mt-10 border-t border-slate-200 pt-8">
