@@ -5,14 +5,15 @@ import { useField, useFormFields } from '@payloadcms/ui'
 
 import './MainImagePicker.scss'
 
-type MediaValue = string | { id?: string; url?: string; filename?: string; alt?: string }
+type MediaID = string | number
+type MediaValue = MediaID | { id?: MediaID; url?: string; thumbnailURL?: string; filename?: string; alt?: string }
 
 const getId = (value: MediaValue | null | undefined) =>
-  typeof value === 'string' ? value : value?.id
+  typeof value === 'object' ? value?.id : value
 
 function useMediaDocuments(values: MediaValue[]) {
-  const ids = useMemo(() => values.map(getId).filter((id): id is string => Boolean(id)), [values])
-  const idsKey = ids.join(',')
+  const ids = useMemo(() => values.map(getId).filter((id): id is MediaID => id !== undefined && id !== null), [values])
+  const idsKey = ids.map(String).join(',')
   const [documents, setDocuments] = useState<Record<string, MediaValue>>({})
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function useMediaDocuments(values: MediaValue[]) {
       }
     })).then((results) => {
       if (cancelled) return
-      setDocuments(Object.fromEntries(results.filter((item): item is MediaValue & { id: string } => Boolean(getId(item))).map((item) => [getId(item)!, item])))
+      setDocuments(Object.fromEntries(results.filter((item): item is MediaValue & { id: MediaID } => getId(item) !== undefined).map((item) => [String(getId(item)), item])))
     })
 
     return () => {
@@ -35,12 +36,12 @@ function useMediaDocuments(values: MediaValue[]) {
     }
   }, [idsKey])
 
-  return values.map((value) => (typeof value === 'string' ? documents[value] || value : value))
+  return values.map((value) => (typeof value === 'object' ? value : documents[String(value)] || value))
 }
 
 function MediaThumbnail({ image, label }: { image: MediaValue; label: string }) {
-  const url = typeof image === 'string' ? undefined : image.url
-  return url ? <img alt={typeof image === 'string' ? '' : image.alt || label} src={url} /> : <span className="main-image-picker__placeholder">IMG</span>
+  const url = typeof image === 'object' ? image.thumbnailURL || image.url : undefined
+  return url ? <img alt={typeof image === 'object' ? image.alt || label : ''} src={url} /> : <span className="main-image-picker__placeholder">IMG</span>
 }
 
 export function MainImagePreview() {
@@ -50,7 +51,7 @@ export function MainImagePreview() {
   if (!selected) return <div className="main-image-preview main-image-preview--empty">Aún no hay una imagen principal. Selecciona una desde la galería.</div>
 
   const image = media || selected
-  const label = typeof image === 'string' ? 'Imagen principal' : image.filename || 'Imagen principal'
+  const label = typeof image === 'object' ? image.filename || 'Imagen principal' : 'Imagen principal'
 
   return (
     <section className="main-image-preview">
@@ -66,8 +67,8 @@ export function MainImagePicker() {
   const gallery = useFormFields(([fields]) => fields?.gallery?.value as MediaValue[] | undefined)
   const { value: selected, setValue } = useField<MediaValue | null>({ path: 'mainImage' })
   const images = Array.isArray(gallery) ? gallery : []
-  const galleryIds = images.map(getId).filter((id): id is string => Boolean(id))
-  const galleryKey = galleryIds.join(',')
+  const galleryIds = images.map(getId).filter((id): id is MediaID => id !== undefined && id !== null)
+  const galleryKey = galleryIds.map(String).join(',')
   const selectedId = getId(selected)
   const media = useMediaDocuments(images)
 
@@ -77,7 +78,7 @@ export function MainImagePicker() {
       return
     }
 
-    if (!selectedId || !galleryIds.includes(selectedId)) setValue(images[0])
+    if (selectedId === undefined || !galleryIds.some((id) => String(id) === String(selectedId))) setValue(images[0])
   }, [galleryKey, images, selected, selectedId, setValue])
 
   if (images.length === 0) return <div className="main-image-picker main-image-picker--empty">Agrega imágenes a la galería para poder seleccionar la principal.</div>
@@ -88,7 +89,7 @@ export function MainImagePicker() {
       <div className="main-image-picker__grid">
         {media.map((image, index) => {
           const id = getId(image)
-          const label = typeof image === 'string' ? `Imagen ${index + 1}` : image.filename || `Imagen ${index + 1}`
+          const label = typeof image === 'object' ? image.filename || `Imagen ${index + 1}` : `Imagen ${index + 1}`
           const isSelected = Boolean(id && id === selectedId)
 
           return (
