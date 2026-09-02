@@ -22,6 +22,7 @@ export const Amenities: CollectionConfig = {
       admin: {
         components: {
           Field: '@/components/admin/AmenityIconPicker#AmenityIconPicker',
+          Cell: '@/components/admin/AmenityIconCell#AmenityIconCell',
         },
       },
     },

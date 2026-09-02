@@ -1,0 +1,17 @@
+.amenity-icon-cell {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.55rem;
+}
+
+.amenity-icon-cell__icon {
+  align-items: center;
+  background: var(--theme-elevation-100);
+  border-radius: 5px;
+  color: var(--theme-success-500);
+  display: inline-flex;
+  font-size: 1.15rem;
+  height: 30px;
+  justify-content: center;
+  width: 30px;
+}
