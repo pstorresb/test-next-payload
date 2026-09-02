@@ -83,37 +83,39 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
               const src = imageURL(project.mainImage)
               const destination = typeof project.destination === 'object' ? project.destination?.name : null
               return (
-                <article key={project.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                  {src ? (
-                    // Payload serves local uploads from the same origin.
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={src} alt={project.title} className="aspect-[3/2] w-full object-cover" />
-                  ) : (
-                    <div className="aspect-[3/2] bg-slate-200" />
-                  )}
-                  <div className="p-5">
-                    <div className="mb-2 flex items-start justify-between gap-3">
-                      <h2 className="text-xl font-semibold">{project.title}</h2>
-                      {project.status && (
-                        <span className="shrink-0 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
-                          {copy.status[project.status as keyof typeof copy.status]}
-                        </span>
-                      )}
+                <Link href={`/${locale}/projects/${project.slug}`} key={project.id} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <article>
+                    {src ? (
+                      // Payload serves local uploads from the same origin.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={src} alt={project.title} className="aspect-[3/2] w-full object-cover" />
+                    ) : (
+                      <div className="aspect-[3/2] bg-slate-200" />
+                    )}
+                    <div className="p-5">
+                      <div className="mb-2 flex items-start justify-between gap-3">
+                        <h2 className="text-xl font-semibold group-hover:text-blue-700">{project.title}</h2>
+                        {project.status && (
+                          <span className="shrink-0 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+                            {copy.status[project.status as keyof typeof copy.status]}
+                          </span>
+                        )}
+                      </div>
+                      {destination && <p className="mb-4 text-sm text-slate-500">{destination}</p>}
+                      <div className="flex items-end justify-between gap-3 border-t border-slate-100 pt-4">
+                        {typeof project.priceFrom === 'number' && (
+                          <p>
+                            <span className="block text-xs text-slate-500">{copy.from}</span>
+                            <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(project.priceFrom)}</strong>
+                          </p>
+                        )}
+                        {typeof project.bedrooms === 'number' && (
+                          <p className="text-sm text-slate-600">{project.bedrooms} {copy.bedrooms}</p>
+                        )}
+                      </div>
                     </div>
-                    {destination && <p className="mb-4 text-sm text-slate-500">{destination}</p>}
-                    <div className="flex items-end justify-between gap-3 border-t border-slate-100 pt-4">
-                      {typeof project.priceFrom === 'number' && (
-                        <p>
-                          <span className="block text-xs text-slate-500">{copy.from}</span>
-                          <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(project.priceFrom)}</strong>
-                        </p>
-                      )}
-                      {typeof project.bedrooms === 'number' && (
-                        <p className="text-sm text-slate-600">{project.bedrooms} {copy.bedrooms}</p>
-                      )}
-                    </div>
-                  </div>
-                </article>
+                  </article>
+                </Link>
               )
             })}
           </div>
