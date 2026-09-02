@@ -64,6 +64,7 @@ export const Projects: CollectionConfig = {
             {
               name: 'slug',
               type: 'text',
+              localized: true,
               required: true,
               unique: true,
               index: true,
@@ -94,48 +95,48 @@ export const Projects: CollectionConfig = {
               ],
             },
             { name: 'featured', label: 'Destacado', type: 'checkbox', defaultValue: false },
-          ],
-        },
-        {
-          label: 'Imágenes',
-          fields: [
-            localeTabs('imagesLocaleTabs'),
             {
-              name: 'mainImage',
-              label: 'Imagen principal',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-              localized: true,
-              admin: {
-                hidden: true,
-              },
-            },
-            {
-              name: 'mainImagePreview',
-              type: 'ui',
-              admin: {
-                components: {
-                  Field: '@/components/admin/MainImagePicker#MainImagePreview',
+              type: 'collapsible',
+              label: 'Imágenes del proyecto',
+              admin: { initCollapsed: false },
+              fields: [
+                localeTabs('imagesLocaleTabs'),
+                {
+                  name: 'mainImage',
+                  label: 'Imagen principal',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                  localized: true,
+                  admin: { hidden: true },
                 },
-              },
-            },
-            {
-              name: 'gallery',
-              label: 'Galería',
-              type: 'upload',
-              relationTo: 'media',
-              hasMany: true,
-              localized: true,
-            },
-            {
-              name: 'mainImagePicker',
-              type: 'ui',
-              admin: {
-                components: {
-                  Field: '@/components/admin/MainImagePicker#MainImagePicker',
+                {
+                  name: 'mainImagePreview',
+                  type: 'ui',
+                  admin: {
+                    components: {
+                      Field: '@/components/admin/MainImagePicker#MainImagePreview',
+                    },
+                  },
                 },
-              },
+                {
+                  name: 'gallery',
+                  label: 'Galería',
+                  type: 'upload',
+                  relationTo: 'media',
+                  hasMany: true,
+                  localized: true,
+                },
+                {
+                  name: 'mainImagePicker',
+                  type: 'ui',
+                  admin: {
+                    components: {
+                      Field: '@/components/admin/MainImagePicker#MainImagePicker',
+                    },
+                  },
+                },
+              ],
             },
           ],
         },
