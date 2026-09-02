@@ -28,6 +28,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { MainImagePreview as MainImagePreview_b0c9793ed2a5c5dce8a95ffc0e8627bf } from '@/components/admin/MainImagePicker'
 import { MainImagePicker as MainImagePicker_b0c9793ed2a5c5dce8a95ffc0e8627bf } from '@/components/admin/MainImagePicker'
+import { ProjectAmenityPicker as ProjectAmenityPicker_1b20d40beee5cd56905d2d01070b8dca } from '@/components/admin/ProjectAmenityPicker'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -62,5 +63,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/admin/MainImagePicker#MainImagePreview": MainImagePreview_b0c9793ed2a5c5dce8a95ffc0e8627bf,
   "@/components/admin/MainImagePicker#MainImagePicker": MainImagePicker_b0c9793ed2a5c5dce8a95ffc0e8627bf,
+  "@/components/admin/ProjectAmenityPicker#ProjectAmenityPicker": ProjectAmenityPicker_1b20d40beee5cd56905d2d01070b8dca,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

@@ -98,7 +98,7 @@ export const Projects: CollectionConfig = {
             {
               type: 'collapsible',
               label: 'Imágenes del proyecto',
-              admin: { initCollapsed: false },
+              admin: { initCollapsed: true },
               fields: [
                 localeTabs('imagesLocaleTabs'),
                 {
@@ -152,6 +152,9 @@ export const Projects: CollectionConfig = {
                   hasMany: true,
                   admin: {
                     description: 'Selecciona las amenidades disponibles para este proyecto.',
+                    components: {
+                      Field: '@/components/admin/ProjectAmenityPicker#ProjectAmenityPicker',
+                    },
                   },
                 },
               ],

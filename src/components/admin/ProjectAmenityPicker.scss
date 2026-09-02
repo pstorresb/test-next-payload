@@ -1,0 +1,58 @@
+.project-amenity-picker {
+  margin-top: 0.25rem;
+}
+
+.project-amenity-picker__help,
+.project-amenity-picker__status {
+  color: var(--theme-elevation-500);
+  font-size: 0.8rem;
+  margin: 0 0 0.75rem;
+}
+
+.project-amenity-picker__status--error {
+  color: var(--theme-error-500);
+}
+
+.project-amenity-picker__grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.project-amenity-picker__option {
+  align-items: center;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  gap: 0.65rem;
+  min-height: 3rem;
+  padding: 0.55rem 0.7rem;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.project-amenity-picker__option:hover {
+  border-color: var(--theme-elevation-400);
+}
+
+.project-amenity-picker__option--selected {
+  background: var(--theme-elevation-100);
+  border-color: var(--theme-success-500);
+}
+
+.project-amenity-picker__option input {
+  accent-color: var(--theme-success-500);
+  margin: 0;
+}
+
+.project-amenity-picker__icon {
+  align-items: center;
+  color: var(--theme-success-500);
+  display: inline-flex;
+  font-size: 1.25rem;
+}
+
+.project-amenity-picker__name {
+  font-size: 0.85rem;
+}
