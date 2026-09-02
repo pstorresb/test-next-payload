@@ -51,7 +51,38 @@ async function run() {
 
   const existingProjects = await payload.find({ collection: 'projects', where: { slug: { equals: 'riviera-bay' } }, limit: 1 })
   if (existingProjects.docs.length > 0) {
-    payload.logger.info('El contenido demo ya existe; no se crearon duplicados.')
+    const spanishProjects = await payload.find({
+      collection: 'projects',
+      locale: 'es',
+      fallbackLocale: false,
+      depth: 0,
+      limit: 100,
+    })
+    const existingMedia = await payload.find({ collection: 'media', depth: 0, limit: 100 })
+
+    for (const project of spanishProjects.docs) {
+      const currentMainImage = typeof project.mainImage === 'number'
+        ? project.mainImage
+        : project.mainImage?.id
+      const fallbackMedia = existingMedia.docs.find((media) => media.filename === `${project.slug}.png`)
+      const mainImage = currentMainImage || fallbackMedia?.id
+
+      if (mainImage) {
+        for (const locale of ['es', 'en'] as const) {
+          await payload.update({
+            collection: 'projects',
+            id: project.id,
+            locale,
+            data: {
+              mainImage,
+              gallery: [mainImage],
+            },
+          })
+        }
+      }
+    }
+
+    payload.logger.info('El contenido demo ya existe; se sincronizaron las imágenes ES → EN sin crear duplicados.')
     process.exit(0)
   }
 
@@ -171,6 +202,8 @@ async function run() {
         title: project.enTitle,
         shortDescription: project.enDescription,
         description: richText(project.enDescription),
+        mainImage: mediaIDs[project.image],
+        gallery: [mediaIDs[project.image]],
         seoTitle: project.enTitle,
         seoDescription: project.enDescription,
         _status: 'published',

@@ -1,4 +1,4 @@
-import type { CollectionConfig, FieldHook } from 'payload'
+import type { CollectionConfig, Field, FieldHook } from 'payload'
 
 const slugify = (value: string) =>
   value
@@ -13,6 +13,16 @@ const setSlug: FieldHook = ({ value, siblingData }) => {
   if (typeof value === 'string' && value.length > 0) return slugify(value)
   return typeof siblingData?.title === 'string' ? slugify(siblingData.title) : value
 }
+
+const localeTabs = (name: string): Field => ({
+  name,
+  type: 'ui',
+  admin: {
+    components: {
+      Field: '@/components/admin/LocaleTabs#LocaleTabs',
+    },
+  },
+})
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -39,6 +49,7 @@ export const Projects: CollectionConfig = {
         {
           label: 'Datos generales',
           fields: [
+            localeTabs('generalLocaleTabs'),
             { name: 'title', type: 'text', required: true, localized: true },
             {
               name: 'slug',
@@ -78,19 +89,32 @@ export const Projects: CollectionConfig = {
         {
           label: 'Imágenes',
           fields: [
-            { name: 'mainImage', label: 'Imagen principal', type: 'upload', relationTo: 'media', required: true },
+            localeTabs('imagesLocaleTabs'),
+            {
+              name: 'mainImage',
+              label: 'Imagen principal',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              localized: true,
+              admin: {
+                description: 'Puede usar el mismo recurso en ambos idiomas o seleccionar uno diferente para el idioma activo.',
+              },
+            },
             {
               name: 'gallery',
               label: 'Galería',
               type: 'upload',
               relationTo: 'media',
               hasMany: true,
+              localized: true,
             },
           ],
         },
         {
           label: 'Amenidades',
           fields: [
+            localeTabs('amenitiesLocaleTabs'),
             {
               name: 'amenities',
               label: 'Amenidades',
@@ -103,6 +127,7 @@ export const Projects: CollectionConfig = {
         {
           label: 'SEO',
           fields: [
+            localeTabs('seoLocaleTabs'),
             { name: 'seoTitle', label: 'Título SEO', type: 'text', localized: true },
             { name: 'seoDescription', label: 'Descripción SEO', type: 'textarea', localized: true },
           ],
