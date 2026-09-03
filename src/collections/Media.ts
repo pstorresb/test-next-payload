@@ -14,7 +14,7 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: 'alt',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
-    group: 'Contenido',
+    group: 'Recursos',
   },
   access: {
     read: () => true,
@@ -24,7 +24,7 @@ export const Media: CollectionConfig = {
   },
   upload: {
     staticDir: 'media',
-    mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/webm', 'video/quicktime'],
     imageSizes: [
       { name: 'thumbnail', width: 320, height: 240, position: 'centre' },
       { name: 'card', width: 768, height: 512, position: 'centre' },

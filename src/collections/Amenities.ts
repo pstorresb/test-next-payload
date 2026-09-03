@@ -6,7 +6,7 @@ export const Amenities: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'icon', 'updatedAt'],
-    group: 'Contenido',
+    group: 'Proyectos',
   },
   access: {
     read: () => true,

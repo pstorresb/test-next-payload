@@ -20,7 +20,7 @@ export const Destinations: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', 'updatedAt'],
-    group: 'Contenido',
+    group: 'Proyectos',
   },
   access: {
     read: () => true,
@@ -40,5 +40,18 @@ export const Destinations: CollectionConfig = {
       admin: { description: 'Se genera desde el nombre si se deja vacío.' },
     },
     { name: 'description', type: 'textarea', localized: true },
+    { name: 'shortDescription', label: 'Descripción corta', type: 'textarea', localized: true },
+    { name: 'coverImage', label: 'Imagen de portada', type: 'upload', relationTo: 'media', localized: true },
+    { name: 'heroImage', label: 'Imagen hero', type: 'upload', relationTo: 'media', localized: true },
+    {
+      name: 'seo',
+      label: 'SEO',
+      type: 'group',
+      fields: [
+        { name: 'metaTitle', label: 'Título SEO', type: 'text', localized: true },
+        { name: 'metaDescription', label: 'Descripción SEO', type: 'textarea', localized: true },
+        { name: 'ogImage', label: 'Imagen Open Graph', type: 'upload', relationTo: 'media', localized: true },
+      ],
+    },
   ],
 }

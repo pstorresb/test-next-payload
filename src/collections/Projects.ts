@@ -30,7 +30,7 @@ export const Projects: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'destination', 'status', '_status', 'updatedAt'],
-    group: 'Inmobiliaria',
+    group: 'Proyectos',
   },
   access: {
     read: ({ req }) => (req.user ? true : { _status: { equals: 'published' } }),
@@ -64,7 +64,7 @@ export const Projects: CollectionConfig = {
             {
               name: 'slug',
               type: 'text',
-              localized: true,
+              localized: false,
               required: true,
               unique: true,
               index: true,
